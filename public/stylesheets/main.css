@@ -1,0 +1,23 @@
+body {
+  font-family: sans-serif;
+}
+
+#game-board{
+  display: grid;
+  grid-template-columns: 20px 120px 120px 120px 120px 20px; 
+  grid-template-rows: 20px 120px 120px 120px 120px 20px; 
+  justify-content: center;
+ }
+
+.box {
+  background-color: #d9d9d9;
+  border: 2px solid black;
+ }
+
+ .wall {
+  background-color:black;
+}
+
+#2-1 {
+  background-color: blue;
+}
