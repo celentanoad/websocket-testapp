@@ -8,6 +8,8 @@ socket.on('reset', function() {
     document.getElementById("message").innerHTML = 'This button is supposed to reset the game, but for now you have to refresh the page';
 });
 
+let turnCounter = 1;
+
 let square1 = document.getElementById("1-1");
 let square2 = document.getElementById("1-2");
 let square3 = document.getElementById("1-3");
@@ -26,30 +28,42 @@ let square15= document.getElementById("4-3");
 let square16 = document.getElementById("4-4");
 
 
-square1.addEventListener('click', flipSquareEvent);
-square2.addEventListener('click', flipSquareEvent);
-square3.addEventListener('click', flipSquareEvent);
-square4.addEventListener('click', flipSquareEvent);
-square5.addEventListener('click', flipSquareEvent);
-square6.addEventListener('click', flipSquareEvent);
-square7.addEventListener('click', flipSquareEvent);
-square8.addEventListener('click', flipSquareEvent);
-square9.addEventListener('click', flipSquareEvent);
-square10.addEventListener('click', flipSquareEvent);
-square11.addEventListener('click', flipSquareEvent);
-square12.addEventListener('click', flipSquareEvent);
-square13.addEventListener('click', flipSquareEvent);
-square14.addEventListener('click', flipSquareEvent);
-square15.addEventListener('click', flipSquareEvent);
-square16.addEventListener('click', flipSquareEvent);
+square1.addEventListener('click', checkFlip);
+square2.addEventListener('click', checkFlip);
+square3.addEventListener('click', checkFlip);
+square4.addEventListener('click', checkFlip);
+square5.addEventListener('click', checkFlip);
+square6.addEventListener('click', checkFlip);
+square7.addEventListener('click', checkFlip);
+square8.addEventListener('click', checkFlip);
+square9.addEventListener('click', checkFlip);
+square10.addEventListener('click', checkFlip);
+square11.addEventListener('click', checkFlip);
+square12.addEventListener('click', checkFlip);
+square13.addEventListener('click', checkFlip);
+square14.addEventListener('click', checkFlip);
+square15.addEventListener('click', checkFlip);
+square16.addEventListener('click', checkFlip);
+
+function checkFlip(evt) {
+    if (!evt.target.style.backgroundColor) {
+        flipSquareEvent(evt);
+    } else {
+        document.getElementById("message").innerHTML = "already been flipped";
+    }
+}
 
 function flipSquareEvent(evt) {
     socket.emit('flip-square', {
         id: evt.target.id
     });
-    console.log(evt.target.id)
 };
 
 function flipSquare({id}) {
-   document.getElementById(id).style["background-color"] = "blue";
+    if (turnCounter === 1) {
+        document.getElementById(id).style["background-color"] = "blue";
+    } else {
+        document.getElementById(id).style["background-color"] = "red";
+    }
+   turnCounter *= -1;
 }
