@@ -8,6 +8,10 @@ socket.on('reset', function() {
     document.getElementById("message").innerHTML = 'This button is supposed to reset the game, but for now you have to refresh the page';
 });
 
+document.getElementById("btn").addEventListener('click', function() {
+    socket.emit('reset');
+  });
+
 let turnCounter = 1;
 
 let square1 = document.getElementById("1-1");
